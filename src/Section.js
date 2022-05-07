@@ -1,6 +1,6 @@
 import Card from './Card';
 import Btns from './Btns';
-import {useRef} from 'react';
+import { useRef } from 'react';
 // import {useState} from 'react'; -> Btns.js
 
 /*
@@ -19,14 +19,24 @@ import {useRef} from 'react';
 - 반면 useRef로 메모리상에 참조되어 있는 가상돔은 해당 컴포넌트 함수가 재랜더링되더라도 값을 그대로 계속 유지
 */
 
+// public에 있는 img를 불러오기 위해 지정한 path
 const path = process.env.PUBLIC_URL;
 
 function Section() {
-  const wrap = useRef(null);
-  const arr = ['Blizzards', 'Calm', 'Dusty_Road', 'Escape', 'Payday', 'Retreat', 'Seasonal', 'Vespers'];
-  const num = arr.length;
+	const wrap = useRef(null);
+	const arr = [
+		'Blizzards',
+		'Calm',
+		'Dusty_Road',
+		'Escape',
+		'Payday',
+		'Retreat',
+		'Seasonal',
+		'Vespers',
+	];
+	const num = arr.length;
 
-  /*
+	/*
   - useState 훅은 배열을 리턴
   - 첫번째 배열값 : 앞으로 변경이 일어날 state값
   - 두번째 배열값 : 해당 상태값을 변경시킬 수 있는 state변경함수
@@ -34,30 +44,31 @@ function Section() {
   - state값 변경으로 재 랜더링이 일어나려면 무조건 state변경함수로만 변경을 해야 재랜더링됨
   */
 
-  // let [index, setIndex] = useState(0); -> Btns.js
-  // console.log(index);
+	// let [index, setIndex] = useState(0); -> Btns.js
+	// console.log(index);
 
-  /*
+	/*
   - JSX 문법 안쪽에서 반복처리할때는 map을 이용
   - JSX 문법 안쪽에서 연산처리가 필요한 부분은 중괄호로 감싸줌
   - map에 의해서 반복생성되는 요소에는 무조건 key값 설정
   */
 
-  return (
-    <>
-      <section className="wrap" ref={wrap}>
-        {arr.map((data, idx)=>{
-          // 자식인 Card 컴포넌트로 data, path 정보값을 props로 전달
-          return <Card key={idx} data={data} path={path} num={num} index={idx} />
-        })}
-      </section>
-      <Btns wrap={wrap} />
-    </>
-  )
+	return (
+		<>
+			<section className='wrap' ref={wrap}>
+				{arr.map((data, idx) => {
+					// 자식인 Card 컴포넌트로 data, path 정보값을 props로 전달
+					return (
+						<Card key={idx} data={data} path={path} num={num} index={idx} />
+					);
+				})}
+			</section>
+			<Btns wrap={wrap} />
+		</>
+	);
 }
 
 export default Section;
-
 
 /*
 - 주석
